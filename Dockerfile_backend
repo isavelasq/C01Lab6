@@ -1,0 +1,20 @@
+# Use a base image with the desired operating system and version
+FROM node:20.0.0-alpine AS backend
+
+# Set the working directory inside the container
+WORKDIR /app/quirknotes/backend
+
+# Copy the requirements file into the container at /app
+COPY quirknotes/backend/package*.json ./
+
+# Install any dependencies
+RUN npm install
+
+# Copy the rest of the application code into the container at /app
+COPY quirknotes/backend ./
+
+# Expose the port your app runs on (replace 4000 with your actual port)
+EXPOSE 4000
+
+# Command to run your application
+CMD ["npm", "start"] 
